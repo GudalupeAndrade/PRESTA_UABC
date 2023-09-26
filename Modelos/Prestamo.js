@@ -1,10 +1,10 @@
 const Prestamo = [
     {
-        Usuario: "",
-        Prestamo:[],
+        Matricula: "1145006",
+        Material:[],
         Descripcion:"",
-        Cantidad:"",
-        Estado:""
+        Cantidad:"2",
+        Estado:"Activo"
 
     },
  

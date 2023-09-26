@@ -1,43 +1,41 @@
-const materiales = require("../Modelos/Material");
-const nuevoMaterial = async function (req, res) {
-    let nuevo = { Tipo: req.query.Tipo, Cantidad: req.query.Cantidad };
-    await materiales.default.push(nuevo);
+const prestamos = require("../Modelos/Prestamo");
+const nuevoPrestamo = async function (req, res) {
+    let nuevo = { Matricula: req.params.Matricula, Material: req.query.Material,
+        Descripcion: req.query.Descripcion, Cantidad: req.query.Cantidad, Estado: req.query.Estado};
+    await prestamos.default.push(nuevo);
     await res.json("Agregado");
 }
-const leerMateriales = async function (req, res) {
-    let datos = await materiales.default;
+
+
+
+
+const leerPrestamos = async function (req, res) {
+    let datos = await prestamos.default;
     await res.json(datos);
 }
 
-const leerMaterial = async function (req, res) {
-    let datos = await materiales.default.find(prop => prop.Tipo === req.params.Tipo);
+const leerPrestamo = async function (req, res) {
+    let datos = await prestamos.default.find(prop => prop.Matricula === req.params.Matricula);
     if(datos == null){
-        await res.json("No se encontro el Material");
+        await res.json("No se encontro el Prestamo");
     }else{
         await res.json(datos);
     }
 }
 
 
-const modificarMaterial = async function (req, res) {
-    let datos = await materiales.default.find(prop => prop.Tipo === req.params.Tipo);
-    datos.Cantidad = req.query.Cantidad;
-    await res.json(datos);
-}
 
-
-const eliminarMaterial = async function (req, res) {
-    materiales.default = await materiales.default.filter((prop) => prop.Tipo !== req.params.Tipo);
-    await res.json(materiales.default);
+const eliminarPrestamo = async function (req, res) {
+    prestamos.default = await prestamos.default.filter((prop) => prop.Matricula !== req.params.Matricula);
+    await res.json(prestamos.default);
 }
 
 
 
 
-module.exports.nuevoMaterial = nuevoMaterial;
-module.exports.leerMateriales = leerMateriales;
-module.exports.leerMaterial = leerMaterial;
-module.exports.modifiMaterial = modificarMaterial;
-module.exports.eliminarMaterial = eliminarMaterial;
+module.exports.nuevoPrestamo = nuevoPrestamo;
+module.exports.leerPrestamos = leerPrestamos;
+module.exports.leerPrestamo = leerPrestamo;
+module.exports.eliminarPrestamo = eliminarPrestamo;
 
 
